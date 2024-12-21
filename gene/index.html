@@ -1,0 +1,95 @@
+<style>
+body
+{
+background-color:lightgrey;
+}
+.content
+{
+padding:100px;
+
+}
+#main
+{
+width:500px;
+padding:50px;
+margin: 0 auto;
+background-color:white;
+}
+#header
+{
+position:fixed;
+width:100%;
+top:0;
+left:0;
+text-align:center;
+background-color:lightblue;
+}
+#footer
+{
+position:fixed;
+width:100%;
+left:0;
+bottom:0;
+text-align:center;
+background-color:lightblue;
+}
+.search
+{
+width:250px;
+color:blue;
+}
+
+</style>
+<html>
+<center>
+<div id=header>
+<h1>Gene Expression data</h1>
+</div>
+<body>
+<div class=content>
+<div id=main>
+<h2 style="color:blue" >Search for Gene expression data</h2>
+Enter gene name <input type=text name=name id=name placeholder="eg:TP53" required>
+<br>
+<br>
+Choose sample type <select id=sam name=sam>
+<option>Select one</option>
+<option>Tumor</option>
+<option>Healthy</option>
+<option>Control</option>
+</select>
+<br><br>
+<input type=submit value="Search" class=search onclick=exp()>
+<br>
+<br>
+<span id=result>
+</span>
+</center>
+</div>
+</div>
+</body>
+<div id=footer>
+&copy all rights reserved 2024
+</div>
+</html>
+
+<script>
+function exp()
+{
+let name=document.getElementById("name").value;
+let sam=document.getElementById("sam").value;
+let xmlhttp=new XMLHttpRequest();
+
+xmlhttp.onreadystatechange=function()
+{
+if(xmlhttp.readyState==4 && xmlhttp.status==200)
+{
+document.getElementById("result").innerHTML=xmlhttp.responseText;
+}
+};
+xmlhttp.open("GET","genee.php?name="+encodeURIComponent(name)+"&sam=" +encodeURIComponent(sam),true);
+xmlhttp.send(null);
+}
+
+
+</script>
